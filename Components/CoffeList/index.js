@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { ImageBackground, View } from "react-native";
+import { NativeRouter, Route, Link, Switch } from "react-router-native";
 
 // Data
 import list from "./list";
@@ -64,7 +65,11 @@ class CoffeList extends Component {
   }
   render() {
     const ListItems = list.map((data, index) => this.renderItem(data, index));
-    return <List>{ListItems}</List>;
+    return (
+      <Link to="/CoffeDetail">
+        <List>{ListItems}</List>
+      </Link>
+    );
   }
 }
 

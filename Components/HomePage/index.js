@@ -17,6 +17,7 @@ import CoffeList from "../CoffeList";
 import CoffeDetail from "../CoffeDetail";
 import CoffeCart from "../CoffeCart";
 import MyHeader from "../MyHeader";
+import { NativeRouter, Route, Link, Switch } from "react-router-native";
 
 // Background Image
 import background from "../../images/b1.png";
@@ -34,17 +35,22 @@ class HomePage extends Component {
         <View style={styles.overlay} />
         <Container>
           <MyHeader />
+
           <Content>
-            <CoffeCart />
+            <Switch>
+              <Route exact path="/CoffeCart" component={CoffeCart} />
+              <Route exact path="/CoffeDetail" component={CoffeDetail} />
+              <Route exact path="/" component={CoffeList} />
+            </Switch>
           </Content>
           <Footer style={{ backgroundColor: "transparent" }}>
             <FooterTab>
-              <Button full>
+              <Link to="/CoffeCart" component={Button}>
                 <Text style={styles.footerbutton}>
                   <Icon name="cart" style={styles.footericon} />
                   Cart
                 </Text>
-              </Button>
+              </Link>
             </FooterTab>
           </Footer>
         </Container>
