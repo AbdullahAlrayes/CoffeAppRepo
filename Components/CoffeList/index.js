@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import { ImageBackground, View } from "react-native";
-import { NativeRouter, Route, Link, Switch } from "react-router-native";
-
-// Data
-import list from "./list";
+import { Link } from "react-router-native";
+import { observer } from "mobx-react";
 
 // NativeBase Components
 import {
@@ -19,6 +17,7 @@ import {
 
 // Style
 import styles from "./styles";
+import productStore from "../../Stores/productStore";
 
 class CoffeList extends Component {
   renderItem(data, index) {
@@ -28,7 +27,9 @@ class CoffeList extends Component {
         style={{ height: 180, width: null, flex: 1 }}
         key={data.name + "-" + index}
       >
-        <ListItem
+        <Link
+          component={ListItem}
+          to={`/CoffeDetail/${data.name}`}
           style={{
             backgroundColor: "transparent",
             borderTopWidth: 0,
@@ -59,18 +60,16 @@ class CoffeList extends Component {
             </CardItem>
           </Card>
           <View style={styles.divider} />
-        </ListItem>
+        </Link>
       </ImageBackground>
     );
   }
   render() {
-    const ListItems = list.map((data, index) => this.renderItem(data, index));
-    return (
-      <Link to="/CoffeDetail">
-        <List>{ListItems}</List>
-      </Link>
+    const ListItems = productStore.items.map((data, index) =>
+      this.renderItem(data, index)
     );
+    return <List>{ListItems}</List>;
   }
 }
 
-export default CoffeList;
+export default observer(CoffeList);

@@ -17,35 +17,9 @@ import starbucks2 from "../../images/starbucks.jpg";
 
 // Style
 import styles from "./styles";
+import productStore from "../../Stores/productStore";
 
 class CoffeCart extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      orders: [
-        {
-          drink: 0,
-          option: 0,
-          quantity: 1
-        },
-        {
-          drink: 1,
-          option: 1,
-          quantity: 2
-        }
-      ],
-      shop: {
-        name: "StarBucks",
-        location: "Salmiya",
-        distance: "5 kilometers",
-        image: starbucks,
-        background: starbucks2,
-        lat: 29.32825632,
-        lng: 47.9258696
-      }
-    };
-  }
-
   renderItem(item, index) {
     return (
       <ListItem key={index}>
@@ -68,16 +42,16 @@ class CoffeCart extends Component {
         <ListItem style={styles.top}>
           <Left>
             <Text style={styles.text}>
-              {this.state.shop.name + "\n"}
-              <Text note>{this.state.shop.location}</Text>
+              {productStore.currentShop.name + "\n"}
+              <Text note>{productStore.currentShop.location}</Text>
             </Text>
           </Left>
           <Body />
           <Right>
-            <Thumbnail bordered source={this.state.shop.image} />
+            <Thumbnail bordered source={productStore.currentShop.image} />
           </Right>
         </ListItem>
-        {this.state.orders.map((item, index) => this.renderItem(item, index))}
+        {productStore.orders.map((item, index) => this.renderItem(item, index))}
       </List>
     );
   }

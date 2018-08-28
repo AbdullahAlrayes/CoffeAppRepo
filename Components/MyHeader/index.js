@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Switch, Route, withRouter } from "react-router-native";
 
 // NativeBase Components
 import {
@@ -20,9 +21,16 @@ class MyHeader extends Component {
     return (
       <Header style={{ backgroundColor: "transparent" }}>
         <Left>
-          <Button transparent>
-            <Icon style={styles.backicon} name="arrow-back" />
-          </Button>
+          <Switch>
+            <Route exact path="/" />
+            <Route
+              render={() => (
+                <Button onPress={() => this.props.history.goBack()} transparent>
+                  <Icon style={styles.backicon} name="arrow-back" />
+                </Button>
+              )}
+            />
+          </Switch>
         </Left>
 
         <Body>
@@ -42,4 +50,4 @@ class MyHeader extends Component {
   }
 }
 
-export default MyHeader;
+export default withRouter(MyHeader);

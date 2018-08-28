@@ -39,7 +39,11 @@ class HomePage extends Component {
           <Content>
             <Switch>
               <Route exact path="/CoffeCart" component={CoffeCart} />
-              <Route exact path="/CoffeDetail" component={CoffeDetail} />
+              <Route
+                exact
+                path="/CoffeDetail/:productName"
+                component={CoffeDetail}
+              />
               <Route exact path="/" component={CoffeList} />
             </Switch>
           </Content>
